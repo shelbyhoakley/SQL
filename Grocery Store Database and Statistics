@@ -1,0 +1,35 @@
+-- Create a Grocery Store Database -- 
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, section TEXT, price INTEGER, quantity INTEGER);
+
+INSERT INTO store VALUES (1, "Celery", "Produce", 1.99, 30);
+INSERT INTO store VALUES (2, "Ibuprofen", "Health", 2.49, 14);
+INSERT INTO store VALUES (3, "Whole Milk", "Dairy", 3.19, 42);
+INSERT INTO store VALUES (4, "Potato Salad", "Deli", 4.49, 8);
+INSERT INTO store VALUES (5, "Hamburger", "Meat", 4.99, 27);
+INSERT INTO store VALUES (6, "Shampoo", "Hygiene", 8.99, 39);
+INSERT INTO store VALUES (7, "Peas", "Frozen", 0.99, 4);
+INSERT INTO store VALUES (8, "Tortillas", "Bakery", 2.99, 11);
+INSERT INTO store VALUES (9, "Diapers", "Baby", 47.99, 16);
+INSERT INTO store VALUES (10, "Cat Litter", "Pets", 11.79, 3);
+INSERT INTO store VALUES (11, "Paper Towels", "Household", 12.99, 14);
+INSERT INTO store VALUES (12, "Granola", "Bulk", 4.79, 9);
+INSERT INTO store VALUES (13, "Ice Cream", "Frozen", 4.99, 52);
+INSERT INTO store VALUES (14, "Asparagus", "Produce", 3.29, 10);
+INSERT INTO store VALUES (15, "Pork Chops", "Meat", 7.37, 23);
+
+-- Display the Database in Order of Price (Descending) --
+SELECT * FROM store
+ORDER BY price desc;
+
+-- What is the Average Price of Items in the Produce Section? --
+SELECT AVG(price) "avg produce item price"
+FROM store
+WHERE section='produce';
+
+-- What are the 5 Items with the Highest Quantity? --
+SELECT item, price, quantity
+FROM store
+ORDER BY quantity desc
+limit 5;
+
