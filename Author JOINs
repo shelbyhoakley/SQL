@@ -1,0 +1,97 @@
+/*Databases created from information I found*/
+
+CREATE TABLE author (
+    authorid INTEGER PRIMARY KEY, 
+    name TEXT, 
+    genre TEXT, 
+    age INTEGER);
+    
+INSERT INTO author VALUES (1, "Stephen King", "Horror", 75);
+INSERT INTO author VALUES (2, "Iris Johansen", "Suspense", 85);
+INSERT INTO author VALUES (3, "James Patterson", "Mystery", 76);
+INSERT INTO author VALUES (4, "Lucy Score", "Romance", 43);
+INSERT INTO author VALUES (5, "Sarah J. Maas", "Fantasy", 37);
+INSERT INTO author VALUES (6, "Lindsey Cord", "Romance", NULL);
+INSERT INTO author VALUES (7, "Dean Koontz", "Suspense", 77);
+INSERT INTO author VALUES (8, "David Grann", "History", 56);
+INSERT INTO author VALUES (9, "Andrew Rea", "Cooking", 35);
+INSERT INTO author VALUES (10, "Judy Blume", "Children", 85);
+
+
+CREATE TABLE paperback (
+    bookid INTEGER,
+    author TEXT,
+    title TEXT, 
+    price INTEGER);
+
+INSERT INTO paperback VALUES (1, "Stephen King", "IT", 19.79);
+INSERT INTO paperback VALUES (2, "Iris Johansen", "The Face of Deception", 14.99);
+INSERT INTO paperback VALUES (3, "James Patterson", "Confessions of a Murder Suspect", 10.99);
+INSERT INTO paperback VALUES (4, "Lucy Score", "Things We Never Got Over", 18.99);
+INSERT INTO paperback VALUES (5, "Sarah J. Maas", "A Court of Thorns and Roses", 15.99);
+INSERT INTO paperback VALUES (6, "Lindsey Cord", "Unexpected", 16.99);
+INSERT INTO paperback VALUES (7, "Dean Koontz", "Odd Thomas", 9.99);
+INSERT INTO paperback VALUES (8, "David Grann", "The Wager", 23.99);
+INSERT INTO paperback VALUES (9, "Andrew Rea", "Binging With Babish", NULL);
+INSERT INTO paperback VALUES (10, "Judy Blume", "Tales of a Fourth Grade Nothing", 8.99);
+
+
+CREATE TABLE hardback (
+    bookid INTEGER,
+    author TEXT,
+    title TEXT, 
+    price INTEGER);
+
+INSERT INTO hardback VALUES (1, "Stephen King", "IT", 31.49);
+INSERT INTO hardback VALUES (2, "Iris Johansen", "The Face of Deception", 27.97);
+INSERT INTO hardback VALUES (3, "James Patterson", "Confessions of a Murder Suspect", 19.99);
+INSERT INTO hardback VALUES (4, "Lucy Score", "Things We Never Got Over", NULL);
+INSERT INTO hardback VALUES (5, "Sarah J. Maas", "A Court of Thorns and Roses", 24.99);
+INSERT INTO hardback VALUES (6, "Lindsey Cord", "Unexpected", NULL);
+INSERT INTO hardback VALUES (7, "Dean Koontz", "Odd Thomas", 25.99);
+INSERT INTO hardback VALUES (8, "David Grann", "The Wager", 27.00);
+INSERT INTO hardback VALUES (9, "Andrew Rea", "Binging With Babish", 23.99);
+INSERT INTO hardback VALUES (10, "Judy Blume", "Tales of a Fourth Grade Nothing", 14.49);
+
+CREATE TABLE audiobook (
+    audioid INTEGER, 
+    title TEXT,
+    availability TEXT);
+
+INSERT INTO audiobook VALUES(1, "IT", "Yes");
+INSERT INTO audiobook VALUES (2, "The Face of Deception", "Yes");
+INSERT INTO audiobook VALUES (3, "Confessions of a Murder Suspect", "Yes");
+INSERT INTO audiobook VALUES (4, "Things We Never Got Over", "Yes");
+INSERT INTO audiobook VALUES (5, "A Court of Thorns and Roses", "Yes");
+INSERT INTO audiobook VALUES (6, "Unexpected", "No");
+INSERT INTO audiobook VALUES (7, "Odd Thomas", "Yes");
+INSERT INTO audiobook VALUES (8, "The Wager", "Yes");
+INSERT INTO audiobook VALUES (9, "Binging With Babish", "No");
+INSERT INTO audiobook VALUES (10, "Tales of a Fourth Grade Nothing", "Yes");
+
+/*Queries*/
+
+/*Joining Author Table with Paperback Table to display author name, title, and paperback price with author and title's column name changed*/
+SELECT a.name AS Author, p.title AS Paperback, p.price 
+    FROM author a
+    JOIN paperback p
+    ON a.name = p.author;
+
+/*Joining Author Table with Hardback Table to display author name, title, and hardback price*/
+SELECT a.name, h.title, h.price
+    FROM author a
+    JOIN hardback h
+    ON a.name = h.author;
+
+/*Joining Paperback Table with Author Table to display Title and Genre)*/
+SELECT p.title, a.genre
+    FROM paperback p
+    JOIN author a
+    ON p.author = a.name;
+
+/*Joining Audiobook Table with Paperback Table to display Title and Audibook Availability*/
+SELECT paper.title, audio.availability AS Audiobook
+    FROM audiobook audio
+    JOIN paperback paper
+    ON paper.title = audio.title;
+    
