@@ -1,4 +1,4 @@
-#In this SQL, I utilized SQLite Studio to query a database with multiple tables in order to quantify a variety of statistics about customer and order data.
+#In this SQL, I utilized SQLiteStudio to query a database with multiple tables in order to quantify a variety of statistics about customer and order data.
 #I did not create the database, but the query code is my own.
 
 #1. How many orders were placed in January?
