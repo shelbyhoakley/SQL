@@ -1,0 +1,46 @@
+# I used a database called ‘Chinook’ that contained records from a digital media store to demonstrate my knowledge of SQL.
+
+#1. Names of all customers from Denmark
+SELECT * FROM chinook.customers
+WHERE country = ‘Denmark’;
+
+#2. Full name, title, and country of all sales department employees
+SELECT FirstName, LastName, Title, Country
+FROM chinook.employees
+WHERE Title LIKE '%Sales%';
+
+#3. Invoices and their associated employee
+SELECT empl.LastName, empl.FirstName, inv.InvoiceId
+FROM chinook.employees AS empl
+JOIN chinook.customers AS cust
+ON cust.SupportRepID = empl.EmployeeID
+JOIN chinook.invoices AS inv
+ON inv.CustomerId = cust.CustomerId;
+
+#4. Number of invoices in 2013
+SELECT COUNT(*)
+FROM chinook.invoices
+WHERE InvoiceDate BETWEEN ‘2013-01-01’ AND ‘2013-12-31’;
+
+#5. Total sales in 2013
+SELECT SUM(total)
+FROM chinook.invoices
+WHERE InvoiceDate BETWEEN ‘2013-01-01’ AND ‘2013-12-31’;
+
+#6. Invoice IDs from 2013
+SELECT InvoiceID
+FROM chinook.invoices
+WHERE InvoiceDate BETWEEN '2013-01-01' AND '2013-12-31';
+
+#7. Highest Performer in sales from 2011
+SELECT empl.FirstName, empl.LastName,
+ROUND (SUM(inv.Total), 2) AS ‘Total Sales’
+FROM chinook.employees AS empl
+JOIN chinook.customers AS cust
+ON cust.SupportRepId = empl.EmployeeID
+JOIN chinook.invoices AS inv
+ON inv.CustomerID = cust.CustomerID
+WHERE empl.Title LIKE ‘%Sales%’
+AND inv.InvoiceDate LIKE ‘%2011%’
+GROUP BY empl.FirstName
+ORDER BY (Round(SUM(inv.Total), 2)) desc LIMIT 1;
